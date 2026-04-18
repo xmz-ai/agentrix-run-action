@@ -1,0 +1,82 @@
+name: Agentrix Run
+description: Submit an Agentrix CI run from GitHub Actions
+
+inputs:
+  agent:
+    description: Agent id or name
+    required: true
+  title:
+    description: Optional custom task title
+    required: false
+  prompt:
+    description: Prompt text sent to Agentrix
+    required: true
+  output-schema:
+    description: Optional JSON Schema string for structured output
+    required: false
+  repo:
+    description: Optional repo JSON override
+    required: false
+  git-server-id:
+    description: Optional Agentrix git server id override for auto-detected repo context
+    required: false
+  response-mode:
+    description: stream or async
+    required: false
+    default: stream
+  issue-number:
+    description: Optional issue number override
+    required: false
+  timeout:
+    description: Wait timeout in seconds
+    required: false
+  capability-profile:
+    description: Optional capability profile
+    required: false
+  runner-id:
+    description: Optional cloud-* or machine-* runner id
+    required: false
+  base-url:
+    description: Agentrix API base URL
+    required: true
+  api-key:
+    description: Agentrix API key
+    required: true
+
+outputs:
+  run-id:
+    description: Agentrix run id
+    value: ${{ steps.agentrix.outputs.run-id }}
+  status:
+    description: Final run status
+    value: ${{ steps.agentrix.outputs.status }}
+  detail-url:
+    description: Agentrix task URL
+    value: ${{ steps.agentrix.outputs.detail-url }}
+  result:
+    description: Final result text
+    value: ${{ steps.agentrix.outputs.result }}
+  structured-output-json:
+    description: Final structured output as a JSON string
+    value: ${{ steps.agentrix.outputs.structured-output-json }}
+
+runs:
+  using: composite
+  steps:
+    - id: agentrix
+      shell: bash
+      env:
+        INPUT_AGENT: ${{ inputs.agent }}
+        INPUT_TITLE: ${{ inputs.title }}
+        INPUT_PROMPT: ${{ inputs.prompt }}
+        INPUT_OUTPUT_SCHEMA: ${{ inputs.output-schema }}
+        INPUT_REPO: ${{ inputs.repo }}
+        INPUT_GIT_SERVER_ID: ${{ inputs.git-server-id }}
+        INPUT_RESPONSE_MODE: ${{ inputs.response-mode }}
+        INPUT_ISSUE_NUMBER: ${{ inputs.issue-number }}
+        INPUT_TIMEOUT: ${{ inputs.timeout }}
+        INPUT_CAPABILITY_PROFILE: ${{ inputs.capability-profile }}
+        INPUT_RUNNER_ID: ${{ inputs.runner-id }}
+        INPUT_BASE_URL: ${{ inputs.base-url }}
+        INPUT_API_KEY: ${{ inputs.api-key }}
+      run: node "${{ github.action_path }}/run.mjs"
