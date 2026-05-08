@@ -28,6 +28,7 @@ jobs:
           base-url: https://agentrix.xmz.ai
           api-key: ${{ secrets.AGENTRIX_API_KEY }}
           agent: codex
+          branch-name: ci/review-${{ github.run_id }}
           prompt: >-
             Review this PR and return one short summary sentence.
 

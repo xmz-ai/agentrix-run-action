@@ -27,6 +27,9 @@ inputs:
   issue-number:
     description: Optional issue number override
     required: false
+  branch-name:
+    description: Optional task branch name override
+    required: false
   timeout:
     description: Wait timeout in seconds
     required: false
@@ -74,6 +77,7 @@ runs:
         INPUT_GIT_SERVER_ID: ${{ inputs.git-server-id }}
         INPUT_RESPONSE_MODE: ${{ inputs.response-mode }}
         INPUT_ISSUE_NUMBER: ${{ inputs.issue-number }}
+        INPUT_BRANCH_NAME: ${{ inputs.branch-name }}
         INPUT_TIMEOUT: ${{ inputs.timeout }}
         INPUT_CAPABILITY_PROFILE: ${{ inputs.capability-profile }}
         INPUT_RUNNER_ID: ${{ inputs.runner-id }}
