@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 
-const AGENTRIX_RUN_VERSION = '0.4.0';
+const AGENTRIX_RUN_VERSION = '0.5.0';
 const AGENTRIX_RUN_PACKAGE = `@agentrix/agentrix-run@${AGENTRIX_RUN_VERSION}`;
 
 function getRequiredEnv(name) {
@@ -23,6 +23,10 @@ function appendOptionalArg(args, flag, value) {
   if (value) {
     args.push(flag, value);
   }
+}
+
+function isTruthy(value) {
+  return ['1', 'true', 'yes', 'on'].includes((value ?? '').trim().toLowerCase());
 }
 
 function buildChildEnv() {
@@ -74,6 +78,9 @@ function main() {
 
     appendOptionalArg(args, '--title', getOptionalEnv('INPUT_TITLE'));
     appendOptionalArg(args, '--output-schema', getOptionalEnv('INPUT_OUTPUT_SCHEMA'));
+    if (isTruthy(getOptionalEnv('INPUT_ALLOW_FILESYSTEM_AGENT'))) {
+      args.push('--allow-filesystem-agent');
+    }
 
     args.push(
       '--prompt',

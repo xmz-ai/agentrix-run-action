@@ -5,6 +5,9 @@ inputs:
   agent:
     description: Agent id or name
     required: true
+  allow-filesystem-agent:
+    description: Allow unresolved agent ids to be resolved from repo/global filesystem agent directories
+    required: false
   title:
     description: Optional custom task title
     required: false
@@ -70,6 +73,7 @@ runs:
       shell: bash
       env:
         INPUT_AGENT: ${{ inputs.agent }}
+        INPUT_ALLOW_FILESYSTEM_AGENT: ${{ inputs.allow-filesystem-agent }}
         INPUT_TITLE: ${{ inputs.title }}
         INPUT_PROMPT: ${{ inputs.prompt }}
         INPUT_OUTPUT_SCHEMA: ${{ inputs.output-schema }}
