@@ -43,8 +43,8 @@ inputs:
     description: Optional cloud-* or machine-* runner id
     required: false
   base-url:
-    description: Agentrix API base URL
-    required: true
+    description: Optional Agentrix API base URL override. Defaults to https://agentrix.xmz.ai.
+    required: false
   api-key:
     description: Agentrix API key
     required: true

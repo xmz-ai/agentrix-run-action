@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 
-const AGENTRIX_RUN_VERSION = '0.5.0';
+const AGENTRIX_RUN_VERSION = '0.6.0';
 const AGENTRIX_RUN_PACKAGE = `@agentrix/agentrix-run@${AGENTRIX_RUN_VERSION}`;
 
 function getRequiredEnv(name) {
@@ -88,11 +88,10 @@ function main() {
       '--response-mode',
       getOptionalEnv('INPUT_RESPONSE_MODE') ?? 'stream',
       '--result-file',
-      resultFile,
-      '--base-url',
-      getRequiredEnv('INPUT_BASE_URL')
+      resultFile
     );
 
+    appendOptionalArg(args, '--base-url', getOptionalEnv('INPUT_BASE_URL'));
     appendOptionalArg(args, '--repo', getOptionalEnv('INPUT_REPO'));
     appendOptionalArg(args, '--issue-number', getOptionalEnv('INPUT_ISSUE_NUMBER'));
     appendOptionalArg(args, '--branch-name', getOptionalEnv('INPUT_BRANCH_NAME'));

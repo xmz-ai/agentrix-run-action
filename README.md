@@ -25,7 +25,6 @@ jobs:
       - id: agentrix
         uses: xmz-ai/agentrix-run-action@v1
         with:
-          base-url: https://agentrix.xmz.ai
           api-key: ${{ secrets.AGENTRIX_API_KEY }}
           agent: codex
           allow-filesystem-agent: true
@@ -47,7 +46,6 @@ jobs:
       - id: agentrix
         uses: xmz-ai/agentrix-run-action@v1
         with:
-          base-url: https://agentrix.xmz.ai
           api-key: ${{ secrets.AGENTRIX_API_KEY }}
           agent: codex
           prompt: >-
@@ -81,4 +79,5 @@ When releasing:
 
 - Do not use `npx @agentrix/agentrix-run` without a version pin.
 - The wrapper should stay thin. Put product logic in Agentrix API and runners, not here.
+- `base-url` is optional and only needed to override the default `https://agentrix.xmz.ai` API URL.
 - `api-key` should be provided through GitHub Actions secrets.
