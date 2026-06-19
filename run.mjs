@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 
-const AGENTRIX_RUN_VERSION = '0.6.0';
+const AGENTRIX_RUN_VERSION = '0.7.0';
 const AGENTRIX_RUN_PACKAGE = `@agentrix/agentrix-run@${AGENTRIX_RUN_VERSION}`;
 
 function getRequiredEnv(name) {
