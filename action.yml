@@ -34,7 +34,7 @@ inputs:
     description: Optional task branch name override
     required: false
   timeout:
-    description: Wait timeout in seconds
+    description: HTTP read timeout and stream wait timeout in seconds
     required: false
   capability-profile:
     description: Optional capability profile
